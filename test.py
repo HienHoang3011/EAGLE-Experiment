@@ -7,6 +7,7 @@ model = EaModel.from_pretrained(
     dtype=torch.float16,
     low_cpu_mem_usage=True,
     device_map="auto",
+    token="hf_your_token_here", # << THÊM TOKEN VÀO ĐÂY / ADD YOUR TOKEN HERE
     total_token=-1
 )
 model.eval()

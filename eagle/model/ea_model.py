@@ -116,21 +116,22 @@ class EaModel(nn.Module):
                 base_model_path, **kwargs
             )
 
+        hf_token = kwargs.get("token", None)
         configpath = os.path.join(ea_model_path, "config.json")
         if not os.path.exists(configpath):
-            configpath = hf_hub_download(ea_model_path, "config.json")
+            configpath = hf_hub_download(ea_model_path, "config.json", token=hf_token)
 
         try:
             load_model_path = os.path.join(ea_model_path, "pytorch_model.bin")
             if not os.path.exists(load_model_path):
-                load_model_path = hf_hub_download(ea_model_path, "pytorch_model.bin")
+                load_model_path = hf_hub_download(ea_model_path, "pytorch_model.bin", token=hf_token)
             ea_layer_state_dict = torch.load(load_model_path,
                                              map_location=base_model.device)
         except:
             from safetensors.torch import load_file
             load_model_path = os.path.join(ea_model_path, "model.safetensors")
             if not os.path.exists(load_model_path):
-                load_model_path = hf_hub_download(ea_model_path, "model.safetensors")
+                load_model_path = hf_hub_download(ea_model_path, "model.safetensors", token=hf_token)
             ea_layer_state_dict = load_file(load_model_path)
         model = cls(
             use_eagle3,

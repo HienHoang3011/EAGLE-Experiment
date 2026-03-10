@@ -2,8 +2,8 @@ from eagle.model.ea_model import EaModel
 from fastchat.model import get_conversation_template
 import torch
 model = EaModel.from_pretrained(
-    base_model_path="lmsys/vicuna-13b-v1.3",
-    ea_model_path="yuhuili/EAGLE3-Vicuna1.3-13B",
+    base_model_path="Qwen/Qwen3-1.7B",
+    ea_model_path="yuAngelSlim/Qwen3-1.7B_eagle3",
     dtype=torch.float16,
     low_cpu_mem_usage=True,
     device_map="auto",
